@@ -1,0 +1,200 @@
+kod 1 :D
+typedef D3DXVECTOR3 Arrow_Position;
+typedef bool(__thiscall* tSendAddFlyTargeting)(DWORD CPythonNetworkStream, DWORD dwTargetVID, const Arrow_Position& kPPosTarget);
+tSendAddFlyTargeting SendAddFlyTargeting = (tSendAddFlyTargeting)Ezgi->e_assembly->SendAddFlyTargetingPacket_c;
+
+Kod 2 :D
+
+struct c_entity
+{
+    int type;
+    float x;
+    float y;
+    float z;
+    int IsDead;
+    DWORD VIDS;
+}c_entity[355];
+
+
+for (int i = 0; i < 231; i += 4) {
+                            // X
+                            DWORD m_iName = metin2client + Client->SeishinOnline->ent_entitylist;
+                            DWORD OFF1, OFF2;
+                            ReadProcessMemory(MEMORY, (LPVOID)(m_iName), &OFF1, 4, NULL);
+                            ReadProcessMemory(MEMORY, (LPVOID)(OFF1 + i), &OFF2, 4, NULL);
+                            ReadProcessMemory(MEMORY, (LPVOID)(OFF2 + Client->SeishinOnline->ent_x), &c_entity[i].x, 4, NULL);
+                            // Y
+                            DWORD m_iName1 = metin2client + Client->SeishinOnline->ent_entitylist;
+                            DWORD OFF3, OFF4;
+                            ReadProcessMemory(MEMORY, (LPVOID)(m_iName1), &OFF3, 4, NULL);
+                            ReadProcessMemory(MEMORY, (LPVOID)(OFF3 + i), &OFF4, 4, NULL);
+                            ReadProcessMemory(MEMORY, (LPVOID)(OFF4 + Client->SeishinOnline->ent_y), &c_entity[i].y, 4, NULL);
+                            // Z
+                            DWORD m_iName2 = metin2client + Client->SeishinOnline->ent_entitylist;
+                            DWORD OFF5, OFF6;
+                            ReadProcessMemory(MEMORY, (LPVOID)(m_iName2), &OFF5, 4, NULL);
+                            ReadProcessMemory(MEMORY, (LPVOID)(OFF5 + i), &OFF6, 4, NULL);
+                            ReadProcessMemory(MEMORY, (LPVOID)(OFF6 + Client->SeishinOnline->ent_z), &c_entity[i].z, 4, NULL);
+                        }
+
+// IsDead
+                if (entity_render)
+                {
+                    for (int i = 0; i < 231; i += 4) {
+                        DWORD m_iName = metin2client + Client->SeishinOnline->ent_entitylist;
+                        DWORD OFF1, OFF2;
+                        ReadProcessMemory(MEMORY, (LPVOID)(m_iName), &OFF1, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF1 + i), &OFF2, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF2 + Client->SeishinOnline->ent_IsDead), &c_entity[i].IsDead, 4, NULL);
+                    }
+                }
+
+Type :
+for (int i = 0; i < 331; i += 4) {
+                        DWORD m_iName = metin2client + Client->SeishinOnline->ent_entitylist;
+                        DWORD OFF1, OFF2;
+                        ReadProcessMemory(MEMORY, (LPVOID)(m_iName), &OFF1, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF1 + i), &OFF2, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF2 + Client->SeishinOnline->ent_type), &c_entity[i].type, 4, NULL);
+                    }
+
+LocalPlayer x y z
+for (int i = 0; i < 331; i += 4) {
+                        DWORD m_iName = metin2client + Client->SeishinOnline->ent_localplayer;
+                        DWORD OFF1, OFF2;
+                        ReadProcessMemory(MEMORY, (LPVOID)(m_iName), &OFF1, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF1 + Client->SeishinOnline->ent_globalptr), &OFF2, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF2 + Client->SeishinOnline->ent_x), &c_players.x, 4, NULL);
+
+                        DWORD m_iName1 = metin2client + Client->SeishinOnline->ent_localplayer;
+                        DWORD OFF3, OFF4;
+                        ReadProcessMemory(MEMORY, (LPVOID)(m_iName1), &OFF3, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF3 + Client->SeishinOnline->ent_globalptr), &OFF4, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF4 + Client->SeishinOnline->ent_y), &c_players.y, 4, NULL);
+
+                        DWORD m_iName2 = metin2client + Client->SeishinOnline->ent_localplayer;
+                        DWORD OFF6, OFF7;
+                        ReadProcessMemory(MEMORY, (LPVOID)(m_iName1), &OFF6, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF3 + Client->SeishinOnline->ent_globalptr), &OFF7, 4, NULL);
+                        ReadProcessMemory(MEMORY, (LPVOID)(OFF4 + Client->SeishinOnline->ent_z), &c_players.z, 4, NULL);
+                    }
+
+Son Kod :D
+
+float Legit(float x, float y, float Px, float Py) { return sqrt((Px - x) * (Px - x) + (Py - y) * (Py - y)); }
+
+static void SendShootPacket(UINT Attack)
+    {
+        try
+        {
+            typedef bool(__thiscall* tCPythonNetworkStreamSendShootPacket)(DWORD nk, UINT Attack);
+            tCPythonNetworkStreamSendShootPacket shooot = (tCPythonNetworkStreamSendShootPacket)Ezgi->e_assembly->SendShootPacket_JmpAssembly;
+            shooot(Ezgi->e_assembly->CPythonNetworkStream_c, Attack);
+        }
+        catch (...) {}
+    }
+
+DWORD WINAPI WaitNinja_Entity(HMODULE hModule)
+{
+    while (true)
+    {
+        try
+        {
+            for (int i = 0; i < 231; i += 4) {
+                float WaitHack = (Legit(c_entity[i].x, c_entity[i].y, c_players.x, c_players.y));
+                if (WaitHack < Ezgi->Radar->new_fov)
+                {
+                    if (c_entity[i].type == 0) // Entity
+                    {
+                        // ==================== Arrow Wait ====================//
+
+                        if (Ezgi->Player->m_iBowWait)
+                        {
+                            if (Ezgi->Player->bow_entity)
+                            {
+                                // Arrow Wait
+                                if (c_entity[i].VIDS > 0)
+                                {
+                                    D3DVECTOR newPosition;
+                                    //Arrow_Position rex;
+                                    newPosition.x = c_players.x;
+                                    newPosition.z = c_players.z;
+                                    newPosition.y = c_players.y;
+                                    SendAddFlyTargeting(*reinterpret_cast<DWORD*>(Ezgi->e_assembly->NetWorkStreamSendAddFlyTargetingPacket), c_entity[i].VIDS, newPosition);
+                                    Packet::SendShootPacket(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Sleep(1000);
+        }
+        catch (...)
+        {
+        }
+    }
+}
+
+isteyen olursa diye addresses
+
+
+struct SeishinOnline
+{
+ 
+ DWORD CPythonNetworkStream_c = *(DWORD*)0x98A320; // Yapıldı networkstream
+    DWORD NetWorkStreamSendAddFlyTargetingPacket = 0x98A320;
+    DWORD SendAddFlyTargetingPacket_c = 0x004DE630; // call adresi call adresi
+    // Extra
+    DWORD SendBattlePacketErrorCall = 0x004DE280; // yapıldı call adresi
+    // Auto pickup
+    DWORD p_PickCloseItemCall = 0x004FD870; // Yapıldı call adresi
+    // GetTargetVID
+    DWORD g_AttackPacketMov = 0x0098A35C; // Yapıldı mov adresi
+    DWORD g_GetTargetVID = 0x00070340; // yapıldı mov adresi
+    // Send Chat Packet - Chat Spawm
+    DWORD SendChatPacketCall = 0x004DB5E0; // Send Chat Packet call aynı bulunumu pickcloseıtem ile
+    DWORD SendChatPacketMov = *(DWORD*)0x0098A320; // Send Chat Packet Mov
+    // Send Item Use Packet
+    DWORD SendItemUsePacketMov_Address = *(DWORD*)0x0098A320;// NetworkStream Send Battle packet error'daki
+    DWORD SendItemUsePacketCall_Address = 0x004ED400;
+    // Send Chat Color
+    DWORD NetWorkStreamSendChatColor_MovAdresss = *(DWORD*)0x009DC308;
+    DWORD SetChatColorCall_CallAdress = 0x00482D70;
+    // Send Shoot Packet
+    DWORD SendShootPacket_JmpAssembly = 0x004DE5E0;// Stringin üstündeki push daki jmp adresi
+
+
+    // main addresses
+    DWORD ent_entitylist = 0x005DC408;//190 4E24  0x1904E2C
+    DWORD ent_localplayer = 0x58A344; // Yapıldı
+    DWORD ent_globalptr = 0x14; // Yapıldı
+
+    DWORD ent_type = 0x728; // Yapıldı
+
+    // özelikler
+    DWORD noclip = 0x8A0; // Yapıldı
+    DWORD ent_charactertype = 0x72C; // Yapıldı
+    DWORD ent_z = 0x79C; // Yapıldı
+    DWORD ent_y = 0x798; // Yapıldı
+    DWORD ent_x = 0x794; // Yapıldı
+    // digerleri
+    DWORD ent_attackspeed = 0x7CC; // Yapıldı
+    DWORD ent_movementspeed = 0x7C8; // Yapıldı
+    DWORD ent_swordrange = 0x7C4; // Yapıldı
+    DWORD ent_quickage = 0x7C0; // Yapıldı
+    DWORD ent_OneHit = 0x724;// Yapıldı
+
+    DWORD ent_SkillHack = 0x750; // Yapıldı
+    DWORD ent_SkillSpeed = 0x648; // Yapıldı
+
+    DWORD ent_Walk = 0x0058A35C;// Yapıldı
+    DWORD ent_walk_ptr = 0xB0;// Yapıldı
+    DWORD ent_VIDS = 0x898; // Yapıldı
+
+    DWORD ent_IsDead = 0x770;
+
+    // asm
+    DWORD ent_InfZoom = 0x52E360;// Yapıldı
+    __forceinline SeishinOnline* operator->() { return this; }
+};
